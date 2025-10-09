@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS historico (
   categoria VARCHAR(100),
   quantidade INT NOT NULL,
   data DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (id) REFERENCES produtos(id) -- vínculo com produtos
+  FOREIGN KEY (id) REFERENCES produtos(id) ON DELETE CASCADE
 );
