@@ -17,8 +17,45 @@
     </header>
     <div class="container"></div>
   
+    <main>
+      <form id="buscarForm">
+      <input id="idProduto" type="number" placeholder="Digite o ID do produto" required />
+      <button type="submit">Buscar</button>
+    </form>
 
+    <div id="dadosProduto" style="display:none; margin-top:20px;">
+      <p><strong>Nome:</strong> <span id="nome"></span></p>
+      <p><strong>Categoria:</strong> <span id="categoria"></span></p>
+      <p><strong>Quantidade atual:</strong> <span id="quantidade"></span></p>
+    </main>
+
+    
     <script>
+
+    const buscarForm = document.getElementById("buscarForm");
+
+    let produtoAtual = null;
+
+    // 🔍 Buscar produto por ID
+    buscarForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = document.getElementById("idProduto").value;
+
+      const res = await fetch(`/api/produto/${id}`);
+      const data = await res.json();
+
+      if (data.erro) {
+        alert(data.erro);
+        document.getElementById("dadosProduto").style.display = "none";
+      } else {
+        produtoAtual = data;
+        document.getElementById("nome").textContent = data.nome;
+        document.getElementById("categoria").textContent = data.categoria;
+        document.getElementById("quantidade").textContent = data.quantidade;
+        document.getElementById("dadosProduto").style.display = "block";
+      }
+    });
+
           function goHome() {
       window.location.href = "/";
     }

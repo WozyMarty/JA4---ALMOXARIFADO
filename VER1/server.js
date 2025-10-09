@@ -125,6 +125,40 @@ app.post("/api/baixa", (req, res) => {
     );
   });
 });
+// Buscar produto por ID
+app.get("/api/produto/:id", (req, res) => {
+  const { id } = req.params;
+  conexao.query("SELECT * FROM produtos WHERE id = ?", [id], (err, results) => {
+    if (err) return res.status(500).json({ erro: err.message });
+    if (results.length === 0) return res.status(404).json({ erro: "Produto não encontrado" });
+    res.json(results[0]);
+  });
+});
+
+// Remover produto completamente
+app.delete("/api/remover/:id", (req, res) => {
+  const { id } = req.params;
+  conexao.query("SELECT * FROM produtos WHERE id = ?", [id], (err, results) => {
+    if (err) return res.status(500).json({ erro: err.message });
+    if (results.length === 0) return res.status(404).json({ erro: "Produto não encontrado" });
+
+    const produto = results[0];
+    conexao.query("DELETE FROM produtos WHERE id = ?", [id], (err2) => {
+      if (err2) return res.status(500).json({ erro: err2.message });
+
+      // Registrar no histórico
+      conexao.query(
+        "INSERT INTO historico (id_produto, tipo, nome, categoria, quantidade) VALUES (?, 'Baixa', ?, ?, ?)",
+        [produto.id, produto.nome, produto.categoria, produto.quantidade],
+        (err3) => {
+          if (err3) console.error("Erro ao salvar no histórico:", err3);
+        }
+      );
+
+      res.json({ mensagem: "Produto removido com sucesso." });
+    });
+  });
+});
 
 
 // Histórico
