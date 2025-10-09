@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solução Almoxarifado</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+
+  </head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <img src="imgs/logo.png" alt="Logo" class="logo">
+    <h1>ALMOXARIFADO</h1>
+    <div class="icons">
+      <div class="home-icon" onclick="goHome()"></div>
+      <div class="user-icon"></div>
+    </div>
+  </header>
+
+  <!-- Container principal -->
+  <div class="container1">
+    <div class="menu-box">
+      <button class="menu-button" onclick="menuAction('/estoque')">ESTOQUE</button>
+      <button class="menu-button" onclick="menuAction('/pesquisar')">PESQUISAR</button>
+      <button class="menu-button" onclick="menuAction('/cadastrar')">CADASTRAR</button>
+      <button class="menu-button" onclick="menuAction('/baixa')">BAIXA</button>
+      <button class="menu-button" onclick="menuAction('/historico')">HISTORICO</button>
+      <button class="menu-button" onclick="menuAction('/configuracao')">CONFIGURAÇÃO</button>
+    </div>
+  </div>
+
+  <script>
+  
+    function goHome() {
+      window.location.href = "/";
+    }
+
+    function menuAction(pagina) {
+      window.location.href = pagina;
+    }
+</script>
+</body>
+</html>

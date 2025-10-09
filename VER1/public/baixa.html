@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/server.js"></script>
+  </head>
+<body>
+    <header>
+      <img src="imgs/logo.png" alt="Logo" class="logo">
+      <h1>ALMOXARIFADO</h1>
+      <div class="icons">
+        <div class="home-icon" onclick="goHome()"></div>
+        <div class="user-icon"></div>
+      </div>
+    </header>
+    <div class="container"></div>
+
+    <main>
+      <form id="form">
+        <input id="nome" type="text" placeholder="Nome do produto" required />
+        <input id="categoria" type="text" placeholder="Categoria" required />
+        <input id="quantidade" type="number" placeholder="Quantidade" required />
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p id="msg"></p>
+    </main>
+
+    <script>
+          function goHome() {
+      window.location.href = "/";
+    }
+
+    </script>
+</body>
+</html>
